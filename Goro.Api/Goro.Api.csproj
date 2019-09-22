@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <ApplicationInsightsResourceId>/subscriptions/b3fc1467-c399-4a2b-9c5b-1ccc5cc4084b/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/Goro.Api</ApplicationInsightsResourceId>
-    <ApplicationInsightsAnnotationResourceId>/subscriptions/b3fc1467-c399-4a2b-9c5b-1ccc5cc4084b/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/Goro.Api</ApplicationInsightsAnnotationResourceId>
+    <ApplicationInsightsResourceId>/subscriptions/3afc4ef5-54cf-4e37-b132-396307269dfd/resourcegroups/goro-api/providers/microsoft.insights/components/goro</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/3afc4ef5-54cf-4e37-b132-396307269dfd/resourceGroups/goro-api/providers/microsoft.insights/components/goro</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.9.1" />
     <PackageReference Include="Microsoft.Azure.Search" Version="5.0.2" />
