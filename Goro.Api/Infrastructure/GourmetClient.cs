@@ -19,7 +19,7 @@ namespace Goro.Api.Infrastructure
         // Retreive all
         // searchable all
         private const string azureSearchName = "goro";
-        private const string azureSearchKey = "606C7141783D5ED5AAF11228EAAC03F5";
+        private const string azureSearchKey = "";
         private const string indexName = "gourment-index";
 
         public static async Task<IEnumerable<GourmetEntity>> SearchAsync()

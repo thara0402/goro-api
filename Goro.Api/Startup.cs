@@ -22,7 +22,7 @@ namespace Goro.Api
     public class Startup
     {
         private const string EndpointUri = "https://goro.documents.azure.com:443/";
-        private const string PrimaryKey = "dB3efYUxjGAwpNlTMUwI4V7SdlDOq08GRnMknSp5lwQwNjnyPslMoAZJuMh1FV1mEtZsAS3eDCuBVBjUhNANIQ==";
+        private const string PrimaryKey = "";
 
         public Startup(IConfiguration configuration)
         {
@@ -34,10 +34,10 @@ namespace Goro.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSingleton(provider =>
-            //{
-            //    return new DocumentClient(new Uri(EndpointUri), PrimaryKey);
-            //});
+            services.AddSingleton(provider =>
+            {
+                return new DocumentClient(new Uri(EndpointUri), PrimaryKey);
+            });
             services.AddSingleton<GourmetRepository>();
 
             services.AddAutoMapper();
