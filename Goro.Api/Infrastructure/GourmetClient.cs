@@ -8,21 +8,26 @@ using Goro.Api.Infrastructure.Models;
 using Microsoft.Azure.Documents.Spatial;
 using Microsoft.Azure.Search;
 using Microsoft.Azure.Search.Models;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace Goro.Api.Infrastructure
 {
-    public static class GourmetClient
+    public class GourmetClient
     {
         // Sortable epsode,season,location
         // Filterble location
         // Retreive all
         // searchable all
-        private const string azureSearchName = "goro";
-        private const string azureSearchKey = "";
         private const string indexName = "gourment-index";
+        private readonly MyOptions _options;
 
-        public static async Task<IEnumerable<GourmetEntity>> SearchAsync()
+        public GourmetClient(IOptions<MyOptions> optionsAccessor)
+        {
+            _options = optionsAccessor.Value;
+        }
+
+        public async Task<IEnumerable<GourmetEntity>> SearchAsync()
         {
             var parameters = new SearchParameters()
             {
@@ -34,7 +39,7 @@ namespace Goro.Api.Infrastructure
             return await SearchAsync(parameters);
         }
 
-        public static async Task<IEnumerable<GourmetEntity>> SearchAsync(double lng, double lat)
+        public async Task<IEnumerable<GourmetEntity>> SearchAsync(double lng, double lat)
         {
             var geo = string.Format("geo.distance(location, geography'POINT({0} {1})')", lng, lat);
             var parameters = new SearchParameters()
@@ -47,11 +52,11 @@ namespace Goro.Api.Infrastructure
             return await SearchAsync(parameters);
         }
 
-        public static async Task<IEnumerable<GourmetEntity>> SearchAsync(SearchParameters parameters)
+        public async Task<IEnumerable<GourmetEntity>> SearchAsync(SearchParameters parameters)
         {
             var restlt = new List<GourmetEntity>();
  
-            var searchClient = new SearchServiceClient(azureSearchName, new SearchCredentials(azureSearchKey));
+            var searchClient = new SearchServiceClient(_options.SearchServiceName, new SearchCredentials(_options.SearchApiKey));
             var indexClient = searchClient.Indexes.GetClient(indexName);
             var gourmetList = await indexClient.Documents.SearchAsync<GourmetEntity>("*", parameters);
             foreach (var gourment in gourmetList.Results)
