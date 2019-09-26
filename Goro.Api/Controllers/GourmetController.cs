@@ -48,29 +48,7 @@ namespace Goro.Api.Controllers
             return Ok(result);
         }
 
-   //     /// <summary>
-   //     /// 
-   //     /// </summary>
-   //     /// <param name="keyword"></param>
-   //     /// <returns></returns>
-   //     /// <response code="200"></response>
-   //     /// <response code="404"></response>
-   //     [HttpGet("{keyword}")]
-   //     [ProducesResponseType(typeof(IEnumerable<Gourmet>), 200)]
-   //     [ProducesResponseType(404)]
-   //     public async Task<IActionResult> Get(string keyword)
-   //     {
-			//var geocode = await GeocodeClient.GetGeocodeAsync(HttpUtility.UrlDecode(keyword));
-			//var entity = await GourmetClient.SearchAsync(geocode.results[0].geometry.location.lng, geocode.results[0].geometry.location.lat);
-   //         var result = _mapper.Map<List<Gourmet>>(entity);
-   //         if (result == null || result.Count == 0)
-   //         {
-   //             return NotFound();
-   //         }
-   //         return Ok(result);
-   //     }
-
-       /// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="lat"></param>
@@ -83,7 +61,7 @@ namespace Goro.Api.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> Get(float lat, float lng)
         {
-			var entity = await GourmetClient.SearchAsync(lng, lat);
+            var entity = await GourmetClient.SearchAsync(lng, lat);
             var result = _mapper.Map<List<Gourmet>>(entity);
             if (result == null || result.Count == 0)
             {
@@ -92,5 +70,27 @@ namespace Goro.Api.Controllers
             return Ok(result);
         }
 
+
+        //     /// <summary>
+        //     /// 
+        //     /// </summary>
+        //     /// <param name="keyword"></param>
+        //     /// <returns></returns>
+        //     /// <response code="200"></response>
+        //     /// <response code="404"></response>
+        //     [HttpGet("{keyword}")]
+        //     [ProducesResponseType(typeof(IEnumerable<Gourmet>), 200)]
+        //     [ProducesResponseType(404)]
+        //     public async Task<IActionResult> Get(string keyword)
+        //     {
+        //var geocode = await GeocodeClient.GetGeocodeAsync(HttpUtility.UrlDecode(keyword));
+        //var entity = await GourmetClient.SearchAsync(geocode.results[0].geometry.location.lng, geocode.results[0].geometry.location.lat);
+        //         var result = _mapper.Map<List<Gourmet>>(entity);
+        //         if (result == null || result.Count == 0)
+        //         {
+        //             return NotFound();
+        //         }
+        //         return Ok(result);
+        //     }
     }
 }
