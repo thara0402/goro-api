@@ -8,22 +8,25 @@ using AutoMapper;
 using Goro.Api.Infrastructure;
 using Goro.Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Goro.Api.Controllers
 {
     /// <summary>
-    /// Person API Controller
+    /// Gourmet API Controller
     /// </summary>
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
     public class GourmetController : ControllerBase
     {
+        private readonly GourmetClient _client;
         private readonly GourmetRepository _repository;
         private readonly IMapper _mapper;
 
-        public GourmetController(GourmetRepository repository, IMapper mapper)
+        public GourmetController(GourmetClient client, GourmetRepository repository, IMapper mapper)
         {
+            _client = client;
             _repository = repository;
             _mapper = mapper;
         }
@@ -39,7 +42,7 @@ namespace Goro.Api.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> Get()
         {
-            var entity = await GourmetClient.SearchAsync();
+            var entity = await _client.SearchAsync();
             var result = _mapper.Map<List<Gourmet>>(entity);
             if (result == null || result.Count == 0)
             {
@@ -61,7 +64,7 @@ namespace Goro.Api.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> Get(float lat, float lng)
         {
-            var entity = await GourmetClient.SearchAsync(lng, lat);
+            var entity = await _client.SearchAsync(lng, lat);
             var result = _mapper.Map<List<Gourmet>>(entity);
             if (result == null || result.Count == 0)
             {
