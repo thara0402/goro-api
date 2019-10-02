@@ -24,8 +24,8 @@ namespace Goro.Api
                 {
                     var settings = config.Build();
 
-                    //config.AddAzureAppConfiguration(options =>
-                    //    options.ConnectWithManagedIdentity(settings["AppConfig:Endpoint"]));
+                    config.AddAzureAppConfiguration(options =>
+                        options.ConnectWithManagedIdentity(settings["AppConfig:Endpoint"]));
 
                     config.AddAzureKeyVault(settings["KeyVault:Endpoint"]);
                 })
