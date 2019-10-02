@@ -32,7 +32,7 @@ namespace Goro.Api
             // Prepare for deployment
             // 1.Enable Identity on web apps
             // 2.Add access policy on key vault(Secret:Get and List, Select principal:web app)
-            // 3.Add Role assignments on Access control(IAM) of App Configuration(Role:Owner, Assign:App Service)
+            // 3.Add Role assignments on Access control(IAM) of App Configuration(Role:Contributor, Assign:App Service)
             services.Configure<MyOptions>(Configuration);
 
             services.AddSingleton(provider =>
