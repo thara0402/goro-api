@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <ApplicationInsightsResourceId>/subscriptions/3afc4ef5-54cf-4e37-b132-396307269dfd/resourcegroups/goro-api/providers/microsoft.insights/components/goro</ApplicationInsightsResourceId>
-    <ApplicationInsightsAnnotationResourceId>/subscriptions/3afc4ef5-54cf-4e37-b132-396307269dfd/resourcegroups/goro-api/providers/microsoft.insights/components/goro</ApplicationInsightsAnnotationResourceId>
+    <ApplicationInsightsResourceId>/subscriptions/3afc4ef5-54cf-4e37-b132-396307269dfd/resourcegroups/goro-api/providers/microsoft.insights/components/goro-ai</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/3afc4ef5-54cf-4e37-b132-396307269dfd/resourceGroups/goro-api/providers/microsoft.insights/components/goro-ai</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
