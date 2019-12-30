@@ -76,7 +76,7 @@ namespace Goro.Api
                 app.UseHsts();
             }
 
-            app.UseCors();
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
