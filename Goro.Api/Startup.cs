@@ -25,6 +25,7 @@ namespace Goro.Api
         }
 
         public IConfiguration Configuration { get; }
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,6 +44,16 @@ namespace Goro.Api
             services.AddSingleton<GourmetRepository>();
 
             services.AddAutoMapper();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    });
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -65,12 +76,14 @@ namespace Goro.Api
                 app.UseHsts();
             }
 
+            app.UseCors();
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Goro API V1");
+                c.RoutePrefix = String.Empty;
             });
         }
     }
