@@ -36,7 +36,19 @@ namespace Goro.Api.Infrastructure
             };
             // https://docs.microsoft.com/en-us/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search
 
-            return await SearchAsync(parameters);
+            return await SearchAsync("*", parameters);
+        }
+
+        public async Task<IEnumerable<GourmetEntity>> SearchAsync(string searchText)
+        {
+            var parameters = new SearchParameters()
+            {
+                OrderBy = new[] { "season asc", "episode asc" },
+                Top = 200
+            };
+            // https://docs.microsoft.com/en-us/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search
+
+            return await SearchAsync(searchText, parameters);
         }
 
         public async Task<IEnumerable<GourmetEntity>> SearchAsync(double lng, double lat)
@@ -49,16 +61,16 @@ namespace Goro.Api.Infrastructure
             };
             // https://docs.microsoft.com/en-us/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search
 
-            return await SearchAsync(parameters);
+            return await SearchAsync("*", parameters);
         }
 
-        public async Task<IEnumerable<GourmetEntity>> SearchAsync(SearchParameters parameters)
+        public async Task<IEnumerable<GourmetEntity>> SearchAsync(string searchText, SearchParameters parameters)
         {
             var restlt = new List<GourmetEntity>();
  
             var searchClient = new SearchServiceClient(_options.SearchServiceName, new SearchCredentials(_options.SearchApiKey));
             var indexClient = searchClient.Indexes.GetClient(indexName);
-            var gourmetList = await indexClient.Documents.SearchAsync<GourmetEntity>("*", parameters);
+            var gourmetList = await indexClient.Documents.SearchAsync<GourmetEntity>(searchText, parameters);
             foreach (var gourment in gourmetList.Results)
             {
                 restlt.Add(gourment.Document);

@@ -51,6 +51,20 @@ namespace Goro.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{searchText}")]
+        [ProducesResponseType(typeof(IEnumerable<Gourmet>), 200)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Get(string searchText)
+        {
+            var entity = await _client.SearchAsync(searchText);
+            var result = _mapper.Map<List<Gourmet>>(entity);
+            if (result == null || result.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+
         /// <summary>
         /// 
         /// </summary>
