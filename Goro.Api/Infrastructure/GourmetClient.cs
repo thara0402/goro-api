@@ -16,7 +16,7 @@ namespace Goro.Api.Infrastructure
     public class GourmetClient
     {
         // Sortable epsode,season,location
-        // Filterble location
+        // Filterble location,season
         // Retreive all
         // searchable all
         private const string indexName = "gourment-index";
@@ -32,6 +32,19 @@ namespace Goro.Api.Infrastructure
             var parameters = new SearchParameters()
             {
                 OrderBy = new[] { "season asc", "episode asc" },
+                Top = 200
+            };
+            // https://docs.microsoft.com/en-us/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search
+
+            return await SearchAsync("*", parameters);
+        }
+
+        public async Task<IEnumerable<GourmetEntity>> SearchAsync(int season)
+        {
+            var parameters = new SearchParameters()
+            {
+                Filter = "season eq " + season,
+                OrderBy = new[] { "episode asc" },
                 Top = 200
             };
             // https://docs.microsoft.com/en-us/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search
